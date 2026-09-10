@@ -124,7 +124,7 @@ USOS_AGUA = [
         "banda_afectacion": "P10",
         "poblacion_estimada": 60,
         "hectareas": 25,
-        "fuente": "Estimacion",
+        "fuente": "Estimado",
     },
     {
         "nombre": "Acueductos veredales (captaciones menores)",
