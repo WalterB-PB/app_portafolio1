@@ -57,7 +57,7 @@ SECCIONES = [
 # ------------------------------------------------------------------
 # CONTEXTO_LOCAL — datos escritos en el código (no provienen de la API).
 # Cada entrada declara su campo `fuente`, que la app pinta como badge:
-# "API CORNARE" = dato medido; "Supuesto del ejercicio" = supuesto editable.
+# "API CORNARE" = dato medido; "Estimado" = supuesto editable a datos no oficiales.
 # ------------------------------------------------------------------
 PERFIL_MUNICIPIO = {
     "texto": (
@@ -68,7 +68,7 @@ PERFIL_MUNICIPIO = {
         "por la pendiente fuerte de su cuenca responde con rapidez a los aguaceros y baja con la "
         "misma velocidad en época seca."
     ),
-    "fuente": "Supuesto del ejercicio",
+    "fuente": "Estimado",
 }
 
 PUNTOS_CRITICOS = [
@@ -80,7 +80,7 @@ PUNTOS_CRITICOS = [
             "El agua cubre las piedras de paso y el tránsito a pie entre los dos barrios se "
             "vuelve inseguro; los vecinos deben rodear por la vía principal."
         ),
-        "fuente": "Supuesto del ejercicio",
+        "fuente": "Estimado",
     },
     {
         "nombre": "Vía Abejorral – La Ceja, sector puente sobre La Aduanilla",
@@ -90,7 +90,7 @@ PUNTOS_CRITICOS = [
             "La lámina llega al estribo del puente y se restringe el paso de vehículos pesados; "
             "se recomienda señalización preventiva y monitoreo del punto."
         ),
-        "fuente": "Supuesto del ejercicio",
+        "fuente": "Estimado",
     },
     {
         "nombre": "Vía veredal hacia La Salada, box culvert",
@@ -100,7 +100,7 @@ PUNTOS_CRITICOS = [
             "El box culvert se anega y la vía queda intransitable; el transporte de leche y "
             "carga veredal debe suspenderse o desviarse por un camino alternativo."
         ),
-        "fuente": "Supuesto del ejercicio",
+        "fuente": "Estimado",
     },
 ]
 
@@ -110,33 +110,33 @@ USOS_AGUA = [
         "banda_afectacion": "P25",
         "poblacion_estimada": 150,
         "hectareas": 18,
-        "fuente": "Supuesto del ejercicio",
+        "fuente": "Estimado",
     },
     {
         "nombre": "Abrevadero de ganado lechero",
         "banda_afectacion": "P10",
         "poblacion_estimada": 90,
         "hectareas": 0,
-        "fuente": "Supuesto del ejercicio",
+        "fuente": "Estimado,
     },
     {
         "nombre": "Beneficio de café en pequeñas fincas",
         "banda_afectacion": "P10",
         "poblacion_estimada": 60,
         "hectareas": 25,
-        "fuente": "Supuesto del ejercicio",
+        "fuente": "Estimacion",
     },
     {
         "nombre": "Acueductos veredales (captaciones menores)",
         "banda_afectacion": "P05",
         "poblacion_estimada": 420,
         "hectareas": 0,
-        "fuente": "Supuesto del ejercicio",
+        "fuente": "Estimacion",
     },
 ]
 
 AVISO_CONTEXTO = (
-    "Las cifras de vías, población y hectáreas son supuestos de referencia del ejercicio, "
+    "Las cifras de vías, población y hectáreas son estimado de referencia del ejercicio, "
     "no provienen de la API de CORNARE. Los niveles, umbrales, fechas y veredas sí son "
     "datos medidos."
 )
@@ -148,7 +148,7 @@ st.set_page_config(page_title="Nivel de estación — CORNARE", page_icon="🌊"
 # hidrograma (ticks, bandas horizontales, línea de agua bajo lo activo).
 LECHO, AGUA, ESPUMA = "#10242E", "#0F6E7D", "#4FB3B8"   # agua honda, primario, acento
 NIEBLA, TINTA, TENUE, LINEA = "#F2F5F4", "#1B2B31", "#5F7278", "#D6DEDD"
-SEDIMENTO = "#C08B3E"                                    # marca los supuestos del ejercicio
+SEDIMENTO = "#C08B3E"                                    # marca los estimados
 C_NORMAL, C_VIGILANCIA, C_ALERTA, C_EMERGENCIA = "#2F7D4F", "#D9A21B", "#DE7629", "#B3322C"
 COLOR_BANDA = {"P25": C_VIGILANCIA, "P10": C_ALERTA, "P05": C_EMERGENCIA,
                "P75": C_VIGILANCIA, "P90": C_ALERTA, "P95": C_EMERGENCIA}
@@ -1071,7 +1071,7 @@ def render_crecientes():
         hide_index=True,
     )
 
-    seccion("Vías y pasos afectados", "Cada punto se activa cuando el nivel cruza el umbral de su banda.", "Supuesto del ejercicio")
+    seccion("Vías y pasos afectados", "Cada punto se activa cuando el nivel cruza el umbral de su banda.", "Estimado")
     filas_puntos = []
     for punto in PUNTOS_CRITICOS:
         corte = cortes[punto["banda"]]
@@ -1101,7 +1101,7 @@ def render_crecientes():
         },
     )
 
-    seccion("Afectaciones por banda", "Qué ocurre en cada punto cuando se cruza su umbral.", "Supuesto del ejercicio")
+    seccion("Afectaciones por banda", "Qué ocurre en cada punto cuando se cruza su umbral.", "Estimado")
     for banda_nombre in ("P75", "P90", "P95"):
         puntos_banda = [p for p in PUNTOS_CRITICOS if p["banda"] == banda_nombre]
         if puntos_banda:
@@ -1255,7 +1255,7 @@ def render_estiaje():
             },
         )
 
-    seccion("Usos del agua que se comprometen", "Actividades que dependen de este tramo y el umbral en que empiezan a sufrir.", "Supuesto del ejercicio")
+    seccion("Usos del agua que se comprometen", "Actividades que dependen de este tramo y el umbral en que empiezan a sufrir.", "Estimado")
     filas_usos = []
     for uso in USOS_AGUA:
         corte = cortes[uso["banda_afectacion"]]
